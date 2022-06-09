@@ -14,21 +14,20 @@
   <body>
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
-      <img alt="logo" src="Logo.png" width="auto" height="auto" />
+        <img alt="logo" src="Logo.png" width="auto" height="auto" />
+      </div>
+      <div class="main-navbar">
+        <a href="#" class="active"><span>Accueil</span></a>
+        <a href="#"><span>Détails de l'évènement</span></a>
+        <a href="#"><span>À propos</span></a>
+        <a href="#"><span>Contact</span></a>
+        <a href="#"><span>Évènements passés</span></a>
+        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </div>
-    <div class="main-navbar">
-      
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
-      <a href="#"><span>À propos</span></a>
-      <a href="#"><span>Contact</span></a>
-      <a href="#"><span>Évènements passés</span></a>
-      <a href="javascript:void(0);" class="icon" onclick="editNav()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
-    </div>
-  </div>
+  <!-- </div> -->
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -55,156 +54,97 @@
       <div class="bground">
         <div class="content">
           <span class="close"></span>
+          <!-- fenêtre modale du formulaire -->
           <div class="modal-body">
-            <form
-              name="reserve"
-              action="index.html"
-              method="get"
-              onsubmit="return validate();"
-            >
-              <div
-                class="formData">
-                <label>Prénom</label><br>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="first"
-                  name="first"
-                  minlength="2"
-                /><br>
+            <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+              <!-- formulaire// section des informations personnelles -->
+              <div class="formData">
+                <!-- TODO #186 lier label à input first (prénom) -->
+                <!-- TODO #191 obliger la saisie avec un minimum de 2 caractères -->
+                <!-- TODO #194 signaler l'obligation de remplir -->
+                <label for="first">Prénom <abbr title="Ce champ est obligatoire">*</abbr></label></br>
+                <input class="text-control" type="text" id="first" name="first" minlength="2" required/></br>
               </div>
-              <div
-                class="formData">
-                <label>Nom</label><br>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="last"
-                  name="last"
-                /><br>
+              <div class="formData">
+                <!-- TODO #187 lier label à input last (nom)-->
+                <!-- TODO #192 obliger la saisie avec un minimum de 2 caractères -->
+                <!-- TODO #195 Signaler l'obligation de remplir -->
+                <label for="last">Nom <abbr title="Ce champ est obligatoire">*</abbr></label></br>
+                <input class="text-control" type="text" id="last" name="last" minlength="2" required/></br>
               </div>
-              <div
-                class="formData">
-                <label>E-mail</label><br>
-                <input
-                  class="text-control"
-                  type="email"
-                  id="email"
-                  name="email"
-                /><br>
+              <div class="formData">
+                <!-- TODO #188 lier label à input email-->
+                <!-- TODO #196 Obliger la saisie du mail -->
+                <!-- TODO #197 signaler l'obligation de remplir le mail -->
+                <label for="email">E-mail <abbr title="Ce champ est obligatoire">*</abbr></label></br>
+                <input class="text-control" type="email" id="email" name="email" required/></br>
               </div>
-              <div
-                class="formData">
-                <label>Date de naissance</label><br>
-                <input
-                  class="text-control"
-                  type="date"
-                  id="birthdate"
-                  name="birthdate"
-                /><br>
+              <div class="formData">
+                <!-- TODO #189 lier label à input birthday -->
+                <label for="birthdate">Date de naissance</label></br>
+                <input class="text-control" type="date" id="birthdate" name="birthdate"/></br>
               </div>
-              <div
-                class="formData">
-                <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+              <div class="formData">
+                <!-- TODO #190 lier label à input quantity -->
+                <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label></br>
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99"/>
               </div>
-              <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-              <div
-                class="formData">
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location1"
-                  name="location"
-                  value="New York"
-                />
+              <!-- formulaire// section des choix par villes -->
+              <!-- TODO #198 signaler l'obligation de sélectionner une ville -->
+              <p class="text-label">
+                A quel tournoi souhaitez-vous participer cette année ? 
+                <abbr title="Une ville doit être sélectionnée">*</abbr>
+              </p>
+              <div class="formData">
+                <!-- TODO #193 Obliger à sélectionner un bouton radio ville -->
+                <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" required/>
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
-                  New York</label
-                >
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location2"
-                  name="location"
-                  value="San Francisco"
-                />
+                  New York
+                </label>
+                <input class="checkbox-input" type="radio" id="location2" name="location" value="San Francisco" required/>
                 <label class="checkbox-label" for="location2">
                   <span class="checkbox-icon"></span>
-                  San Francisco</label
-                >
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location3"
-                  name="location"
-                  value="Seattle"
-                />
+                  San Francisco
+                </label>
+                <input class="checkbox-input" type="radio" id="location3" name="location" value="Seattle" required/>
                 <label class="checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>
-                  Seattle</label
-                >
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location4"
-                  name="location"
-                  value="Chicago"
-                />
+                  Seattle
+                </label>
+                <input class="checkbox-input" type="radio" id="location4" name="location" value="Chicago" required/>
                 <label class="checkbox-label" for="location4">
                   <span class="checkbox-icon"></span>
-                  Chicago</label
-                >
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location5"
-                  name="location"
-                  value="Boston"
-                />
+                  Chicago
+                </label>
+                <input class="checkbox-input" type="radio" id="location5" name="location" value="Boston" required/>
                 <label class="checkbox-label" for="location5">
                   <span class="checkbox-icon"></span>
-                  Boston</label
-                >
-                <input
-                  class="checkbox-input"
-                  type="radio"
-                  id="location6"
-                  name="location"
-                  value="Portland"
-                />
+                  Boston
+                </label>
+                <input class="checkbox-input" type="radio" id="location6" name="location" value="Portland" required/>
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
-                  Portland</label
-                >
+                  Portland
+                </label>
               </div>
-
-              <div
-                class="formData">
-                <input
-                  class="checkbox-input"
-                  type="checkbox"
-                  id="checkbox1"
-                  checked
-                />
-                <label class="checkbox2-label" for="checkbox1" required>
+              <!-- formulaire// conditions et inscription alerte -->
+              <div class="formData">
+                <!-- TODO #199 Obliger à approuver les conditions générales, required retiré de label et placé dans input -->
+                <input class="checkbox-input" type="checkbox" id="checkbox1" checked required/>
+                <!-- TODO #200 signaler l'obligation d'approuver les confitions générales -->
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
-                </label>
-                <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                  <abbr title="Les conditions générales doivent être approuvées">*</abbr>
+                </label></br>
+                <input class="checkbox-input" type="checkbox" id="checkbox2"/>
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
-                </label>
-                <br>
+                  Je souhaite être prévenu des prochains évènements.
+                </label></br>
               </div>
-              <input
-                class="btn-submit"
-                type="submit"
-                class="button"
-                value="C'est parti"
-              />
+              <input class="btn-submit" type="submit" class="button" value="C'est parti"/>
             </form>
           </div>
         </div>
