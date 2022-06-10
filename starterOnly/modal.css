@@ -402,7 +402,7 @@ input[data-error]::after {
 /* custom select end */
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
 }
 .hero-section {
   min-height: 93vh;
