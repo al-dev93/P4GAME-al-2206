@@ -53,105 +53,119 @@
           <span class="close"></span>
           <!-- fenêtre modale du formulaire -->
           <div class="modal-body">
-            <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+            <!-- COMMENT: ajour de l'attribut novalidate pour délégation de la validation à JavaScript -->
+            <form name="reserve" action="index.html" method="get" novalidate onsubmit="return validate();">
               <!-- formulaire// section des informations personnelles -->
-              <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+              <div class="formData" data-error="Veuillez entrer 2 à 30 caractères pour le prénom"
                 data-error-visible="false">
-                <!-- TODO #186 lier label à input first (prénom) -->
-                <!-- TODO #191 obliger la saisie avec un minimum de 2 caractères -->
-                <!-- TODO #194 signaler l'obligation de remplir -->
+                <!--TODO #186 lier label à input first (prénom)-->
+                <!--TODO #191 obliger la saisie avec un minimum de 2 caractères et en respectant la Regex-->
+                <!--NOTE: tous les caractères alphabétiques et accentués, espaces et un seul tiret si nécessaire-->
+                <!--TODO #194 signaler l'obligation de remplir-->
                 <label class="text-label" for="first">
-                  Prénom <abbr title="Ce champ est obligatoire">*</abbr>
+                  Prénom <abbr title="Prénom obligatoire avec 2 à 30 caractères">*</abbr>
                 </label></br>
-                <input class="text-control" type="text" id="first" name="first" minlength="2" required /></br>
+                <input class="text-control" type="text" id="first" name="first" minLenght="2" maxlength="30" 
+                  pattern="([a-zA-Z\xC0-\xFF](\s?[a-zA-Z\xC0-\xFF])+)(-?([a-zA-Z\xC0-\xFF])((\s?[a-zA-Z\xC0-\xFF])*)+)?"
+                  placeholder="lettres accents 1tiret espaces" required /></br>
               </div>
-              <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom."
+              <div class="formData" data-error="Veuillez entrer 2 à 30 caractères pour le nom"
                 data-error-visible="false">
-                <!-- TODO #187 lier label à input last (nom)-->
-                <!-- TODO #192 obliger la saisie avec un minimum de 2 caractères -->
-                <!-- TODO #195 Signaler l'obligation de remplir -->
+                <!--TODO #187 lier label à input last (nom)-->
+                <!--TODO #192 Obliger la saisie avec un minimum de 2 caractères et en respectant la Regex-->
+                <!--NOTE: tous les caractères alphabétiques et accentués, espaces et un seul tiret si nécessaire-->
+                <!--TODO #195 Signaler l'obligation de remplir-->
                 <label class="text-label" for="last">
-                  Nom <abbr title="Ce champ est obligatoire">*</abbr>
+                  Nom <abbr title="Nom obligatoire avec 2 à 30 caractères">*</abbr>
                 </label></br>
-                <input class="text-control" type="text" id="last" name="last" minlength="2" required /></br>
+                <input class="text-control" type="text" id="last" name="last" minLenght="2" maxlength="30" 
+                  pattern="([a-zA-Z\xC0-\xFF](\s?[a-zA-Z\xC0-\xFF])+)(-?([a-zA-Z\xC0-\xFF])((\s?[a-zA-Z\xC0-\xFF])*)+)?"
+                  placeholder="lettres accents 1tiret espaces" required /></br>
               </div>
-              <div class="formData" data-error="Veuillez entrer une adresse électronique valide."
+              <div class="formData" data-error="Veuillez entrer une adresse électronique valide"
                 data-error-visible="false">
-                <!-- TODO #188 lier label à input email-->
-                <!-- TODO #196 Obliger la saisie du mail -->
-                <!-- TODO #197 signaler l'obligation de remplir le mail -->
+                <!--TODO #188 lier label à input email-->
+                <!--TODO #196 Obliger la saisie du mail-->
+                <!--TODO #197 signaler l'obligation de remplir le mail-->
                 <label class="text-label" for="email">
-                  E-mail <abbr title="Ce champ est obligatoire">*</abbr>
+                  E-mail <abbr title="Adresse électronique obligatoire">*</abbr>
                 </label></br>
                 <input class="text-control" type="email" id="email" name="email" required /></br>
               </div>
-              <div class="formData" data-error="Vous devez entrer votre date de naissance."
+              <div class="formData" data-error="Vous devez avoir au moins 18 ans"
                 data-error-visible="false">
-                <!-- TODO #189 lier label à input birthday -->
-                <!-- TODO #206 Obliger la saisie de la date de naissance -->
-                <!-- TODO #207 Signaler l'obligation de renseigner la date de naissance -->
+                <!--TODO #189 lier label à input birthday-->
+                <!--TODO #206 Obliger la saisie de la date de naissance en respectant-->
+                <!--NOTE: -->
+                <!--TODO #207 Signaler l'obligation de renseigner la date de naissance-->
                 <label class="text-label" for="birthdate">
-                  Date de naissance <abbr title="Ce champ est obligatoire">*</abbr>
+                  Date de naissance <abbr title="Date de naissance obligatoire">*</abbr>
                 </label></br>
                 <input class="text-control" type="date" id="birthdate" name="birthdate" required /></br>
               </div>
-              <div class="formData">
+              <div class="formData" data-error="Vous devez saisir un nombre compris entre 0 et 99"
+                data-error-visible="false">
                 <!-- TODO #190 lier label à input quantity -->
-                <label class="text-label" for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label></br>
-                <input class="text-control" type="number" id="quantity" name="quantity" min="0" max="99" />
+                <!-- TODO Obliger la saisie d'un nombre -->
+                <!--NOTE le regex vérifie la présence de caractères numériques -->
+                <label class="text-label" for="quantity">
+                  À combien de tournois GameOn avez-vous déjà participé ?
+                </label></br>
+                <input class="text-control" type="number" id="quantity" name="quantity" min="0" max="99"
+                  pattern="[0-9]" value="0"/>
               </div>
               <!-- formulaire// section des choix par villes -->
               <!-- TODO #198 signaler l'obligation de sélectionner une ville -->
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ? 
-                <abbr title="Une ville doit être sélectionnée">*</abbr>
+                <abbr title="La ville est obligatoire">*</abbr>
               </p>
-              <div class="formData" data-error="Vous devez choisir une option." data-error-visible="false">
+              <div class="formData" data-error="Vous devez choisir une ville" data-error-visible="false" tabindex="-1">
                 <!-- TODO #193 Obliger à sélectionner un bouton radio ville -->
                 <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" required />
-                <label class="checkbox-label" for="location1">
+                <label class="checkbox-label" for="location1" tabindex="0">
                   <span class="checkbox-icon"></span>
                   New York
                 </label>
                 <input class="checkbox-input" type="radio" id="location2" name="location" value="San Francisco" required />
-                <label class="checkbox-label" for="location2">
+                <label class="checkbox-label" for="location2" tabindex="0">
                   <span class="checkbox-icon"></span>
                   San Francisco
                 </label>
                 <input class="checkbox-input" type="radio" id="location3" name="location" value="Seattle" required />
-                <label class="checkbox-label" for="location3">
+                <label class="checkbox-label" for="location3" tabindex="0">
                   <span class="checkbox-icon"></span>
                   Seattle
                 </label>
                 <input class="checkbox-input" type="radio" id="location4" name="location" value="Chicago" required />
-                <label class="checkbox-label" for="location4">
+                <label class="checkbox-label" for="location4" tabindex="0">
                   <span class="checkbox-icon"></span>
                   Chicago
                 </label>
                 <input class="checkbox-input" type="radio" id="location5" name="location" value="Boston" required />
-                <label class="checkbox-label" for="location5">
+                <label class="checkbox-label" for="location5" tabindex="0">
                   <span class="checkbox-icon"></span>
                   Boston
                 </label>
                 <input class="checkbox-input" type="radio" id="location6" name="location" value="Portland" required />
-                <label class="checkbox-label" for="location6">
+                <label class="checkbox-label" for="location6" tabindex="0">
                   <span class="checkbox-icon"></span>
                   Portland
                 </label>
               </div>
               <!-- formulaire// conditions et inscription alerte -->
-              <div class="formData" data-error="Vous devez vérifier que vous acceptez les termes et conditions."
-                data-error-visible="false">
+              <div class="formData" data-error="Vous devez accepter les termes et conditions"
+                data-error-visible="false" tabindex="-1">
                 <!-- TODO #199 Obliger à approuver les conditions générales, required retiré de label et placé dans input -->
                 <input class="checkbox-input" type="checkbox" id="checkbox1" required />
                 <!-- TODO #200 signaler l'obligation d'approuver les confitions générales -->
-                <label class="checkbox2-label" for="checkbox1">
+                <label class="checkbox2-label" for="checkbox1" tabindex="0">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
-                  <abbr title="Les conditions générales doivent être approuvées">*</abbr>
+                  <abbr title="Les termes et conditions générales doivent être acceptées">*</abbr>
                 </label></br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
-                <label class="checkbox2-label" for="checkbox2">
+                <label class="checkbox2-label" for="checkbox2" tabindex="0">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label></br>
