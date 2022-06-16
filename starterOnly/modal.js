@@ -1,4 +1,4 @@
-//COMMENT: déclarions globales
+//* déclarions globales
 const maxAge = 70; // age maximun pour l'inscription
 const minAge = 18; // age minimum pour l'inscription
 
@@ -30,7 +30,7 @@ class DateForm {
   }
 }
 
-//COMMENT: Objet de gestion des dates d'insciption
+//COMMENT: Objet pour la gestion des dates d'insciption
 const dateRegistration = new DateForm(minAge, maxAge);
 
 //COMMENT: function ajoutant la classe responsive pour le menu sur affichage mobile
@@ -43,50 +43,48 @@ function editNav() {
   }
 }
 
-//COMMENT: gestion des éléments du DOM
-//  ciblages des élements pour le contrôle de la modale
+//* gestion des éléments du DOM
+//COMMENT:  ciblages des élements pour le contrôle de la modale
 const modalBackground = document.querySelector(".bground");
 const buttonRegistration = document.querySelectorAll(".modal-btn");
 //COMMENT: ciblage pour la fermeture de la modale
 const modalClosure = document.querySelector(".close");
 //COMMENT: ciblages pour la validation des champs du formulaire
 const formData = document.querySelectorAll(".formData");
-const formBirthday = document.querySelector('input[type="date"]');
-const formInputRequired = document.querySelectorAll('input[required=""]');
 //COMMENT: ciblage pour la validation du formulaire
 const formRegistration = document.getElementsByTagName("form")[0];
+const formDisabled = document.querySelector(".modal-body");
+const validationConfirm = document.querySelector(".confirm-submit");
 
-//COMMENT: contrôle des évènements de la modale
-buttonRegistration.forEach((btn) => btn.addEventListener("click", commandModal));
+//*  Gestion de la modale
+//COMMENT: appel de l'ouverture au click sur le bouton
+buttonRegistration.forEach((btn) => btn.addEventListener("click", openModal));
 
-//COMMENT: évènement déclenchant la fermeture de la modale
-modalClosure.addEventListener("click", commandModal);
+//NOTE: appel de la fonction de fermeture au click sur la croix
+modalClosure.addEventListener("click", closeModal);
 
-//COMMENT: fonction pour l'ouverture et la fermeture de la modale
-function commandModal(event) {
-  if (event.currentTarget.className == "btn-signup modal-btn") {
-    modalBackground.style.display = "block";
-    //COMMENT: fonction mettant à jour les attributs 
-    //  min et max à l'aide de l'objet dateRegistration
+//COMMENT: fonction pour l'ouverture de la modale
+function openModal() {
+  const formBirthday = document.querySelector('input[type="date"]');
+  //COMMENT: ouverture de la modale en retirant la classe disabled
+  modalBackground.classList.remove("disabled");
+  //COMMENT: fonction mettant à jour les attributs du champ date
+  //  min et max avec l'objet dateRegistration
     formBirthday.setAttribute("min", dateRegistration.getMinDate());
     formBirthday.setAttribute("max", dateRegistration.getMaxDate());
-  }
-  else if (event.currentTarget.className == "close") {
-    const modalContent = document.querySelector(".content");
-    //COMMENT: animation pour la fermeture de la modale
-    modalContent.animate([
-      {opacity: 1, transform: 'translateY(0px)', easing: 'ease-out'},
-      {opacity: 0, transform: 'translateY(-160px)'}
-    ], 1000
-    );
-    //COMMENT: attend la fin de l'animation pour faire disparaitre la modale
-    Promise.all(
-      modalContent.getAnimations().map(animation => animation.finished)
-    ).then(() => modalBackground.style.display = "none");
-  }
 }
 
-//COMMENT: validation des champs du formulaire après changement
+//NOTE: fonction pour la fermeture de la modale
+function closeModal() {
+  //COMMENT: désactive le message de confirmation et la modale
+  validationConfirm.classList.add("disabled");
+  modalBackground.classList.add("disabled");
+  //COMMENT: active à nouveau le formulaire
+  formDisabled.classList.remove("disabled");
+}
+
+//* Gestion du formulaire
+//NOTE: validation des champs du formulaire après changement
 formData.forEach((value) => value.addEventListener("change", validContent));
 function validContent(event) {
   const inputData = event.target;
@@ -94,10 +92,12 @@ function validContent(event) {
   formData.setAttribute("data-error-visible", (inputData.validity.valid) ? "false" : "true");
 }
 
-//COMMENT: validation du formulaire avant l'envoi
+//NOTE: validation du formulaire et envoi
 formRegistration.addEventListener("submit", validSubmit);
 function validSubmit(event) {
+  const formInputRequired = document.querySelectorAll('input[required=""]');
   let numberOfErrors = 0;
+  //NOTE: vérification de la validité de tous les champs requis
   for (const inputRequired of formInputRequired) {
     let formData = inputRequired.parentElement;
     if(inputRequired.value == "" || !inputRequired.validity.valid) {
@@ -105,5 +105,12 @@ function validSubmit(event) {
       numberOfErrors++;
     }
   }
-  if(numberOfErrors > 0) event.preventDefault();
+  //COMMENT: si le formulaire ne contient pas d'erreurs ouverture du message de confirmation
+  //  désactivation et réinitialisation du formulaire
+  if(numberOfErrors == 0) {
+    validationConfirm.classList.remove("disabled");
+    formDisabled.classList.add("disabled");
+    formRegistration.reset();
+  }
+  event.preventDefault();
 }

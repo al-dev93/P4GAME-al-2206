@@ -171,8 +171,11 @@ main {
   font-size: 16px;
 }
 
-.bground {
+/* COMMENT: désactive la modale */
+.bground.disabled {
   display: none;
+}
+.bground {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -182,7 +185,7 @@ main {
   overflow: auto;
   background-color: var(--colorBackgroundModal);
 }
-/* TODO créer une class bground-close pour la fermeture de la modale.*/
+
 .content {
   margin: 5% auto;
   width: 100%;
@@ -197,9 +200,36 @@ main {
   padding-top: 10px;
 }
 
+/* COMMENT: remplace le formulaire dans la modale par la confirmation d'envoi */
+.confirm-submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 17.19px;
+}
+.confirm-submit.disabled {
+  display: none;
+}
+.confirm-message {
+  margin: 351px 0 330.29px 0;
+  padding: 0px;
+  font-family: var(--font-slab);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 51px;
+  text-align: center;
+  color: var(--colorWhiteText);
+}
+
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+}
+/* COMMENT: masque le contenu du formulaire dans la modale */
+.modal-body.disabled {
+  display: none;
 }
 
 label {
@@ -341,6 +371,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
+.btn-close,
 .btn-submit,
 .btn-signup {
   background: var(--colorButton);
