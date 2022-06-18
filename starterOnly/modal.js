@@ -70,8 +70,8 @@ function openModal() {
   modalBackground.classList.remove("disabled");
   //COMMENT: fonction mettant à jour les attributs du champ date
   //  min et max avec l'objet dateRegistration
-    formBirthday.setAttribute("min", dateRegistration.getMinDate());
-    formBirthday.setAttribute("max", dateRegistration.getMaxDate());
+  formBirthday.setAttribute("min", dateRegistration.getMinDate());
+  formBirthday.setAttribute("max", dateRegistration.getMaxDate());
 }
 
 //NOTE: fonction pour la fermeture de la modale
