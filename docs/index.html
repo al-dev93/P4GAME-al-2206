@@ -19,7 +19,7 @@
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a>
-        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+        <a href="javascript:void(0);" class="icon" onclick="editNav()" aria-label="hamburger menu">
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -76,7 +76,7 @@
                 <label class="text-label" for="first">
                   Prénom <abbr title="Prénom obligatoire avec 2 à 30 caractères">*</abbr>
                 </label></br>
-                <input class="text-control" type="text" id="first" name="first" minLenght="2" maxlength="30" 
+                <input class="text-control" type="text" id="first" name="first" minLenght="2" maxlength="30"
                   pattern="([a-zA-Z\xC0-\xFF](\s?[a-zA-Z\xC0-\xFF])+)(-?([a-zA-Z\xC0-\xFF])((\s?[a-zA-Z\xC0-\xFF])*)+)?"
                   placeholder="lettres accents 1tiret espaces" required /></br>
               </div>
@@ -89,7 +89,7 @@
                 <label class="text-label" for="last">
                   Nom <abbr title="Nom obligatoire avec 2 à 30 caractères">*</abbr>
                 </label></br>
-                <input class="text-control" type="text" id="last" name="last" minLenght="2" maxlength="30" 
+                <input class="text-control" type="text" id="last" name="last" minLength="2" maxlength="30"
                   pattern="([a-zA-Z\xC0-\xFF](\s?[a-zA-Z\xC0-\xFF])+)(-?([a-zA-Z\xC0-\xFF])((\s?[a-zA-Z\xC0-\xFF])*)+)?"
                   placeholder="lettres accents 1tiret espaces" required /></br>
               </div>
@@ -128,7 +128,7 @@
               <!-- formulaire// section des choix par villes -->
               <!--COMMENT: signaler l'obligation de sélectionner une ville -->
               <p class="text-label">
-                A quel tournoi souhaitez-vous participer cette année ? 
+                A quel tournoi souhaitez-vous participer cette année ?
                 <abbr title="La ville est obligatoire">*</abbr>
               </p>
               <div class="formData" data-error="Vous devez choisir une ville" data-error-visible="false" tabindex="-1">
